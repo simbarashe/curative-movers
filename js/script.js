@@ -74,6 +74,22 @@ var userAgent = navigator.userAgent.toLowerCase(),
  */
 $document.ready(function () {
 
+    $("#contact-us-send-email").click(function(){        
+        var fullName = plugins.rdMailForm[0].elements["contact-us-name"].value + " " + plugins.rdMailForm[0].elements["contact-us-last-name"].value;
+        var emailAddress = plugins.rdMailForm[0].elements["contact-us-email"].value;
+        var message = plugins.rdMailForm[0].elements["contact-us-message"].value;
+        sendEmail(fullName,emailAddress,message)
+        alert('message sent successfully')
+    });
+
+    function sendEmail(fullName,emailAddress,message) {
+   $.ajax({
+    url: "https://formspree.io/sales@curative.co.za", 
+    method: "POST",
+    data: {name: fullName,email: emailAddress,message: message },
+    dataType: "json"
+});
+  }
   /**
    * getSwiperHeight
    * @description  calculate the height of swiper slider basing on data attr
